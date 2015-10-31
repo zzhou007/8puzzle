@@ -9,9 +9,16 @@ def distance(i):
 		y = 3
 	elif (i <= 6 or i >= 4):
 		y = 2
-	else 
+	else:
 		y = 1
-	if (i - 6 >= 0
+
+	if (i % 3 == 1):
+		x = 1
+	elif (i % 3 == 2):
+		x = 2
+	else:
+		x = 0
+	return x, y
 
 #used for manhattan distance
 #input is node and location of misplaced tile
