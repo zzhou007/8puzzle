@@ -1,7 +1,7 @@
 class node:
 	#makes node input = puzzle state, location of blank, and depth in tree
-	def __init__(self, tl, tm, tr, ml, mm, mr, bl, bm, br):
-		self.state = [tl, tm, tr, ml, mm, mr, bl, bm, br]
+	def __init__(self, state):
+		self.state = state
 		for i in self.state:
 			if (self.state[i] == 0):
 				self.blankP = i

@@ -1,5 +1,6 @@
 import queue
 from node import *
+import copy
 
 #find x and y value form an 8puzzle grid
 def coord(i):
@@ -25,7 +26,7 @@ def coord(i):
 #returns misplaced distance for one piece
 def manhattan(node, j):
 	#missplaced, x and y axis of node and j
-	a = coord(node)
+	a = coord(node.state[j])
 	b = coord(j + 1)
 	return abs(a[1] - b[1]) + abs(a[0] - b[0])
 
@@ -36,14 +37,14 @@ def heuristic(node, i):
 		return 0
 	elif i == 1:
 		misplaced = 0
-		for j in range(0, len(node) - 1):
-			if node[j] != j + 1:
+		for j in range(0, len(node.state) - 1):
+			if node.state[j] != j + 1:
 				misplaced += 1
 		return misplaced
 	elif i == 2:
 		misplaced = 0
-		for j in range(0, len(node) - 1):
-			if node[j] != j + 1:
+		for j in range(0, len(node.state) - 1):
+			if node.state[j] != j + 1:
 				misplaced += manhattan(node, j)
 		return misplaced
 	else:
@@ -53,19 +54,29 @@ def heuristic(node, i):
 #input is state to expand and hurist value
 #returns a list of  expansions 
 def expand(node, hurist):
-	depth = node.depth + 1
-	child = node
-	if (node.moveU()):
-		child = node
-		child.depth = depth
-	if (node.moveD()):
-		child = node
-		child.depth = depth
-	if (node.moveL()):
-		child = node
-		child.depth = depth
-	if (node.moveR()):
-		child = node
-		child.depth = depth
-	h = heuristic(node, hurist)
-	return (h + depth, child)
+	#list for expanded childern and their heuristics
+	children = []
+	heuristics = []
+	#for all possible moves make deep copy and if you can move 
+	#add to childern list and add heuristic + depth 
+	nodeU = copy.deepcopy(node)
+	if (nodeU.moveU()):
+		nodeU.depth += 1
+		children.append(nodeU)
+		heuristics.append(heuristic(nodeU, hurist) + nodeU.depth)
+	nodeD = copy.deepcopy(node)
+	if (nodeD.moveD()):
+		nodeD.depth += 1
+		children.append(nodeD)
+		heuristics.append(heuristic(nodeD, hurist) + nodeD.depth)
+	nodeL = copy.deepcopy(node)
+	if (nodeL.moveL()):
+		nodeL.depth += 1
+		children.append(nodeL)
+		heuristics.append(heuristic(nodeL, hurist) + nodeL.depth)
+	nodeR = copy.deepcopy(node)
+	if (nodeR.moveR()):
+		nodeR.depth += 1
+		children.append(nodeR)
+		heuristics.append(heuristic(nodeR, hurist) + nodeR.depth)
+	return (heuristics , children)
