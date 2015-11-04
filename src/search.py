@@ -6,19 +6,19 @@ import copy
 def coord(i):
 	y = 0
 	x = 0
-	if (i <= 9 or i >= 7):
-		y = 3
-	elif (i <= 6 or i >= 4):
+	if (i <= 3 and i >= 1):
+		y = 1
+	elif (i <= 6 and i >= 4):
 		y = 2
 	else:
-		y = 1
+		y = 3
 
 	if (i % 3 == 1):
 		x = 1
 	elif (i % 3 == 2):
 		x = 2
 	else:
-		x = 0
+		x = 3
 	return x, y
 
 #used for manhattan distance
@@ -28,6 +28,7 @@ def manhattan(node, j):
 	#missplaced, x and y axis of node and j
 	a = coord(node.state[j])
 	b = coord(j + 1)
+	#print( "y1 =", a[1], "y2=", b[1], "x1 =", a[0], "x2 =", b[0])
 	return abs(a[1] - b[1]) + abs(a[0] - b[0])
 
 #input is current state and witch heuristic to use
@@ -37,13 +38,13 @@ def heuristic(node, i):
 		return 0
 	elif i == 1:
 		misplaced = 0
-		for j in range(0, len(node.state) - 1):
+		for j in range(0, len(node.state)):
 			if node.state[j] != j + 1:
 				misplaced += 1
 		return misplaced
 	elif i == 2:
 		misplaced = 0
-		for j in range(0, len(node.state) - 1):
+		for j in range(0, len(node.state)):
 			if node.state[j] != j + 1:
 				misplaced += manhattan(node, j)
 		return misplaced

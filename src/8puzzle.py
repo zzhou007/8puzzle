@@ -37,6 +37,7 @@ def search(initial, searchType):
 		node[2].printP()
 		#solution
 		if (node[2].state == solution.state):
+			print("visited ", len(visited))
 			return True
 		#checks if node is visited already if not add to que
 		print("expanding this node ...")
