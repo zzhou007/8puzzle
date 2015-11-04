@@ -1,0 +1,31 @@
+Enter an 8puzzle
+"Enter the type of search
+		(0) Uniform cost
+		(1) A* with misplaced tile heuristic
+		(2) A* with manhattan distance
+		
+1 2 3 
+4   6 
+7 5 8 
+The best state to expand with a 
+			h(n) = 4 
+			g(n) = 0 is ...
+1 2 3 
+4   6 
+7 5 8 
+expanding this node ...
+The best state to expand with a 
+			h(n) = 2 
+			g(n) = 1 is ...
+1 2 3 
+4 5 6 
+7   8 
+expanding this node ...
+The best state to expand with a 
+			h(n) = 0 
+			g(n) = 2 is ...
+1 2 3 
+4 5 6 
+7 8   
+visited  3
+solution found
