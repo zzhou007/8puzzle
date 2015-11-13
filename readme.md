@@ -2,7 +2,7 @@
 ###Summary
 A simple 8 puzzle solver written in Python3 that uses A* search and 3 different heuristics:
 
-* Hard coded 0
+* Hard coded 0 (uniform cost search)
 * Misplaced
 * Manhattan
 
